@@ -30,6 +30,7 @@ class Qanda:  # class for questions and answers
             print(x)
 
     def runGame(self, questions):
+        score = 0
         counter = questions
         used = []  # a list of questions that were already used
         while counter > 0:
@@ -55,9 +56,13 @@ class Qanda:  # class for questions and answers
                 print("D. "+d)
                 userAnswer = input("Answer: ")
                 if userAnswer.upper() == "A": #as of right now, A is the only correct answer
+                    score += 1
                     print("Correct!")
                 else:
                     print("Wrong!")
 
                 used.append(randNum)
                 counter -= 1
+
+        print('\n', "Your Final score is: ", score, '\n')
+
