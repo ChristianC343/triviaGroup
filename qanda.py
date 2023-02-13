@@ -1,11 +1,13 @@
 import random
 
+
 # idea: takes question and answer from an input file, randomly selects one pair
 # and puts into a tuple
 class Qanda:  # class for questions and answers
     string1 = "qanda created"
     qlist = []
     alist = []
+    score = 0
 
     def __init__(self):
         # when a new object is defined, creates a question and answer stored into 2 lists, along with dummy answers
@@ -30,7 +32,6 @@ class Qanda:  # class for questions and answers
             print(x)
 
     def runGame(self, questions):
-        score = 0
         counter = questions
         used = []  # a list of questions that were already used
         while counter > 0:
@@ -56,13 +57,18 @@ class Qanda:  # class for questions and answers
                 print("D. "+d)
                 userAnswer = input("Answer: ")
                 if userAnswer.upper() == "A": #as of right now, A is the only correct answer
-                    score += 1
+                    self.score += 1
                     print("Correct!")
                 else:
                     print("Wrong!")
 
                 used.append(randNum)
                 counter -= 1
+                
+        print('\n', "Your Final score is: ", self.score, '\n') 
+        return self.score
 
-        print('\n', "Your Final score is: ", score, '\n')
+        
+
+
 

@@ -1,16 +1,25 @@
 import random
 import qanda
+import leaderboard
+import sys
 
 def startGame(numOfQues):
     game = qanda.Qanda()
-    game.runGame(numOfQues)
-
+    return game.runGame(numOfQues)
 
 def main():
     print("Hello, Welcome to a Quick Round of Trivia!")
     name = input("Please enter your name: ") # User Name
     progRunning = True #Will continue to keep the program running until user exit
+    #checks if the users information exists or not to display different welcome message
+    #leaderboard.readfile("leaderboard.txt")
+    #existing_user = leaderboard.get_user(name)
+    #if existing_user:
+    #    print("Welcome back " + name + ", this is a prototype trivia game.")
+    #else:
+    
     print("Welcome " + name + ", this is a prototype trivia game.")
+    
     while progRunning == True:
         print("1. Show Leaderboard")
         print("2. Play Easy Mode (5 Questions)")
@@ -24,18 +33,22 @@ def main():
             print("Leaderboard")
         elif selection == 2:
             print("Easy Mode")
-            startGame(5)
+            score = startGame(5)
+            leaderboard.save_user(name, score)
         elif selection == 3:
             print("Medium Mode")
-            startGame(10)
+            score = startGame(10)
+            #leaderboard.save_user(name, score)
         elif selection == 4:
             print("Hard Mode")
-            startGame(15)
+            score = startGame(15)
+            #leaderboard.save_user(name, score)
         elif selection == 5:
             print("Thanks for Playing!")
-            progRunning = False
+            leaderboard.writefile("leaderboard.txt")
+            sys.exit()
         else:
             print("Invalid Choice. Try again")
 
 if __name__ == "__main__":
-    main()
+    main() 
