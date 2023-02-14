@@ -3,17 +3,9 @@
         "hello": [
             "Hi there, text 'trivia to start a trivia game!"
         ],
-        "trivia": {
-            "content": "Hello, Welcome to a Quick Round of Trivia!",
-            "name_prompt": "Please enter your name: ",
-            "welcome_new_user": "Welcome {name}, this is a prototype trivia game.",
-            "menu_options": [
-                "Show Leaderboard",
-                "Play Easy Mode (5 Questions)",
-                "Play Medium Mode (10 Questions)",
-                "Play Hard Mode (15 Questions)",
-                "Quit"
-            ]
-        }
+        "trivia": [
+            "Hello, Welcome to a Quick Round of Trivia!"
+        ]
+            
     }
 }
