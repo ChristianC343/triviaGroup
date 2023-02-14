@@ -51,6 +51,7 @@ def handle_request():
     elif sent_input == 'trivia':
         with open('chatbot_trivia.json', 'r') as myfile: # open and read the json file
             TRIVIA = json.loads(myfile.read())
+            response = (TRIVIA['init']['content'])
     else:
         CORPUS['input'][sent_input] = ['DID NOT FIND']
         with open('chatbot_corpus.json', 'w') as myfile:
