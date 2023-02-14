@@ -44,14 +44,15 @@ def handle_request():
 
     sent_input = str(request.form['Body']).lower()# getting the input sent from the user, converting to lower
    
+    user_name = str(request.form['Body']).lower()
 
 
     if sent_input in CORPUS['input']: # check to see the if the sent input is inside the json file
         response = random.choice(CORPUS['input'][sent_input])
     elif sent_input in CORPUS['trivia']:
-        with open('chatbot_trivia.json', 'r') as myfile: # open and read the json file
-            TRIVIA = json.loads(myfile.read())
-            response = (TRIVIA['init']['content'])
+        response = (CORPUS['trivia']['content'])
+        response = (CORPUS['trivia']['name_prompt'])
+        
     else:
         CORPUS['input'][sent_input] = ['DID NOT FIND']
         with open('chatbot_corpus.json', 'w') as myfile:
