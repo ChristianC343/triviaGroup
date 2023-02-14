@@ -20,6 +20,7 @@ with open('config.yml', 'r') as yml_file:
     yml_configs = yaml.safe_load(yml_file)
 
 CORPUS = {}
+TRIVIA = {}
 
 with open('chatbot_corpus.json', 'r') as myfile: # open and read the json file
     CORPUS = json.loads(myfile.read())
@@ -47,6 +48,9 @@ def handle_request():
 
     if sent_input in CORPUS['input']: # check to see the if the sent input is inside the json file
         response = random.choice(CORPUS['input'][sent_input])
+    elif sent_input == 'trivia':
+        with open('chatbot_trivia.json', 'r') as myfile: # open and read the json file
+            TRIVIA = json.loads(myfile.read())
     else:
         CORPUS['input'][sent_input] = ['DID NOT FIND']
         with open('chatbot_corpus.json', 'w') as myfile:

@@ -2,11 +2,6 @@
     "input": {
         "hello": [
             "Hi there, text 'trivia to start a trivia game!"
-        ],
-        "trivia": [
-            {
-                "file_path": "./chatbot_trivia.json"
-            }
         ]
     }
 }
