@@ -48,7 +48,7 @@ def handle_request():
 
 
     if sent_input in CORPUS['input']: # check to see the if the sent input is inside the json file
-        response = random.choice(CORPUS['input'][sent_input])
+        response = CORPUS['input'][sent_input]
     else:
         CORPUS['input'][sent_input] = ['DID NOT FIND']
         with open('chatbot_corpus.json', 'w') as myfile:
