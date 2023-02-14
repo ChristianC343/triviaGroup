@@ -11,6 +11,7 @@ from things.actors import actor
 import random
 import json
 import pickle
+from triviaGroup import main
 
 yml_configs = {}
 BODY_MSGS = []
@@ -43,8 +44,10 @@ def handle_request():
     response = 'NOT FOUND'
 
     sent_input = str(request.form['Body']).lower()# getting the input sent from the user, converting to lower
-    
-    if sent_input in CORPUS['input']: # check to see the if the sent input is inside the json file
+    if sent_input == 'trivia':
+        trivia.main()
+
+    elif sent_input in CORPUS['input']: # check to see the if the sent input is inside the json file
         response = random.choice(CORPUS['input'][sent_input])
     else:
         CORPUS['input'][sent_input] = ['DID NOT FIND']

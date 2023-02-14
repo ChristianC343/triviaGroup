@@ -38,11 +38,11 @@ def main():
         elif selection == 3:
             print("Medium Mode")
             score = startGame(10)
-            #leaderboard.save_user(name, score)
+            leaderboard.save_user(name, score)
         elif selection == 4:
             print("Hard Mode")
             score = startGame(15)
-            #leaderboard.save_user(name, score)
+            leaderboard.save_user(name, score)
         elif selection == 5:
             print("Thanks for Playing!")
             leaderboard.writefile("leaderboard.txt")
