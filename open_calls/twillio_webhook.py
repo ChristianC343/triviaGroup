@@ -39,9 +39,6 @@ def handle_request():
     logger.debug(act.prev_msgs)
     
 
-    
-     
-
     response = 'NOT FOUND'
 
     sent_input = str(request.form['Body']).lower()# getting the input sent from the user, converting to lower
