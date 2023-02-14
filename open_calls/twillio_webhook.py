@@ -48,7 +48,7 @@ def handle_request():
 
     if sent_input in CORPUS['input']: # check to see the if the sent input is inside the json file
         response = random.choice(CORPUS['input'][sent_input])
-    elif sent_input == 'trivia':
+    elif sent_input in CORPUS['trivia']:
         with open('chatbot_trivia.json', 'r') as myfile: # open and read the json file
             TRIVIA = json.loads(myfile.read())
             response = (TRIVIA['init']['content'])
