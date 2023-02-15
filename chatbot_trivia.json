@@ -1,17 +1,23 @@
 {
-    "init" : {
-        "content": "Hello, Welcome to a Quick Round of Trivia!",
-        "name_prompt": "Please enter your name: ",
-        "welcome_new_user": "Welcome {name}, this is a prototype trivia game.",
-        "menu_options": [
-            "Show Leaderboard",
-            "Play Easy Mode (5 Questions)",
-            "Play Medium Mode (10 Questions)",
-            "Play Hard Mode (15 Questions)",
-            "Quit"
-        ]
+    "init": {
+        "content": "Hello, Welcome to a Quick Round of Trivia!"
+    },
+    "name_prompt": {
+        "content": "Please enter your name: "
+    },
+    "welcome_message": {
+        "content": "Welcome {name}, this is a prototype trivia game."
+    },
+    "menu_options": [
+        "Show Leaderboard",
+        "Play Easy Mode (5 Questions)",
+        "Play Medium Mode (10 Questions)",
+        "Play Hard Mode (15 Questions)",
+        "Quit"
+    ],
+    "selection_prompt": {
+        "content": "Please make a selection: "
     }
-            
-    
 }
+
       
