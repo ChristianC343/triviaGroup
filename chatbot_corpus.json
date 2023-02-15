@@ -1,11 +1,7 @@
 {
     "input": {
         "hello": [
-            "Hi there, text 'trivia to start a trivia game!"
-        ],
-        "trivia": [
-            "Hello, Welcome to a Quick Round of Trivia!"
+            "Hi there, text 'trivia' to start a trivia game!"
         ]
-            
     }
 }

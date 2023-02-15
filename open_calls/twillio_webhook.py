@@ -13,7 +13,6 @@ import json
 import pickle
 
 
-
 yml_configs = {}
 BODY_MSGS = []
 with open('config.yml', 'r') as yml_file:
@@ -21,6 +20,7 @@ with open('config.yml', 'r') as yml_file:
 
 CORPUS = {}
 TRIVIA = {}
+next_prompt = None
 
 with open('chatbot_corpus.json', 'r') as myfile: # open and read the json file
     CORPUS = json.loads(myfile.read())
@@ -50,6 +50,7 @@ def handle_request():
         with open('chatbot_trivia.json', 'r') as myfile:
             TRIVIA = json.loads(myfile.read())
             response = TRIVIA['init']['content']
+            next_prompt = TRIVIA['init']['name_prompt']
     else:
         CORPUS['input'][sent_input] = ['DID NOT FIND']
         with open('chatbot_corpus.json', 'w') as myfile:
@@ -61,4 +62,11 @@ def handle_request():
                      body=response,
                      from_=yml_configs['twillio']['phone_number'],
                      to=request.form['From'])
+    
+    if next_prompt:
+        message = g.sms_client.messages.create(
+                         body=next_prompt,
+                         from_=yml_configs['twillio']['phone_number'],
+                         to=request.form['From'])
+    
     return json_response( status = "ok" )
