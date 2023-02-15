@@ -2,8 +2,9 @@ import yaml
 from flask import request, g
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 from os.path import exists
-
 from things.actors import actor
+
+
 
 from tools.logging import logger
 from things.actors import actor
@@ -12,6 +13,8 @@ from things.actors import actor
 import random
 import json
 import pickle
+
+
 
 
 yml_configs = {}
@@ -55,7 +58,8 @@ def handle_request():
     elif 'name' not in act.state:
         act.state['name'] = sent_input  # set the user's name to the state attribute
         response = TRIVIA['welcome_message']['content'].format(name=sent_input)
-        next_prompt = TRIVIA['selection_prompt']['content']   
+        next_prompt = TRIVIA['selection_prompt']['content'] + '\n' + '\n'.join(TRIVIA['menu_options'])
+        
     else:
         CORPUS['input'][sent_input] = ['DID NOT FIND']
         with open('chatbot_corpus.json', 'w') as myfile:
