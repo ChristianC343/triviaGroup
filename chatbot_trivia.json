@@ -9,11 +9,9 @@
         "content": "Welcome {name}, this is a prototype trivia game."
     },
     "menu_options": [
-        "Show Leaderboard",
-        "Play Easy Mode (5 Questions)",
-        "Play Medium Mode (10 Questions)",
-        "Play Hard Mode (15 Questions)",
-        "Quit"
+        "1. Show Leaderboard",
+        "2. Play Easy Mode (5 Questions)",
+        "3. Quit"
     ],
     "selection_prompt": {
         "content": "Please make a selection: "
