@@ -64,10 +64,11 @@ def startGame(numOfQues):
         q = game.qlist[i]
         a = game.alist[i].split(",")
         response += f"\nQuestion {i+1}: {q}"
-        response += f"\nA. {a[0]}"
-        response += f"\nB. {a[1]}"
-        response += f"\nC. {a[2]}"
-        response += f"\nD. {a[3]}"
+        rndmz = random.sample(range(0, 3) 4)
+        response += f"\nA. {a[rndmz[0]]}"
+        response += f"\nB. {a[rndmz[1]]}"
+        response += f"\nC. {a[rndmz[2]]}"
+        response += f"\nD. {a[rndmz[3]]}"
     response += "\n\nPlease respond with your answers as A, B, C, or D."
     message = g.sms_client.messages.create(
         body=response,
@@ -91,7 +92,7 @@ def handle_request():
 
     sent_input = str(request.form['Body'])
 
-    if sent_input == 'hello': 
+    if sent_input.lower() == 'hello': 
         response = hello_prompt + '\n' + select + '\n'+ '\n'.join(TRIVIA['menu_options'])
     else:
         if sent_input in ['1', '2', '3']:
