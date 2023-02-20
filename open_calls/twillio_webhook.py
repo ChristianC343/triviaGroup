@@ -90,9 +90,9 @@ def handle_request():
     easy = 'Easy Mode'
     bye = 'Thanks for Playing!'
 
-    sent_input = str(request.form['Body'])
+    sent_input.lower() = str(request.form['Body'])
 
-    if sent_input.lower() == 'hello': 
+    if sent_input == 'hello': 
         response = hello_prompt + '\n' + select + '\n'+ '\n'.join(TRIVIA['menu_options'])
     else:
         if sent_input in ['1', '2', '3']:
