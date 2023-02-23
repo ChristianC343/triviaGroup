@@ -1,7 +1,11 @@
 {
-    "input": {
-        "hello": [
-            "Hi there, text 'trivia' to start a trivia game!"
-        ]
+    "user_id": [],
+    "+15713038708": {
+        "current_question": {
+            "question": "What is the boiling point of water at sea level in degrees Celsius?",
+            "answer": "A",
+            "current_question_num": 0,
+            "score": 0
+        }
     }
 }
