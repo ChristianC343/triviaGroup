@@ -2,10 +2,12 @@
     "user_id": [],
     "+15713038708": {
         "current_question": {
-            "question": "What is the boiling point of water at sea level in degrees Celsius?",
-            "answer": "A",
-            "current_question_num": 0,
-            "score": 0
+            "question": "What animal has the highest blood pressure?",
+            "answer": "A"
+        },
+        "current_game": {
+            "question_num": 5,
+            "score": 3
         }
     }
 }
