@@ -52,7 +52,7 @@ def start_game(user_id, response):
 
     options = list(questions[random_index]['options'].values())
     answer = questions[random_index]['answer']
-    question_text = f"Question : {selected_question['question']}\nA. {options[0]}\nB. {options[1]}\nC. {options[2]}\nD. {options[3]}\nEnter your answer (A, B, C, or D):"
+    question_text = f"Question : {selected_question}\nA. {options[0]}\nB. {options[1]}\nC. {options[2]}\nD. {options[3]}\nEnter your answer (A, B, C, or D):"
     # Initialize the user's CORPUS if it doesn't exist
     if user_id not in CORPUS:
         CORPUS[user_id] = {}
