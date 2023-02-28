@@ -93,105 +93,27 @@ def handle_request():
             act = pickle.load(p)
         print("I AM CURRENTLY LOADING")
     else:
-        act= actor(request.form['From'])
-        # create the file and write the actor object to it
-        with open(filename, "wb") as f:
-            pickle.dump(actor, f)
-    msg = request.form['Body']
-    print("Printing msg : " + msg)
-    act = actor(user_id)
-    act.save_msg(msg)
-    last_response = act.prev_msgs[-1]
-    logger.debug(act.prev_msgs)
-
-    # Response strings
-    hello_prompt = 'Hello, welcome to a quick round of trivia!'
-    select = TRIVIA['selection_prompt']['content']
-    lb = 'Leaderboard'
-    easy = 'Easy mode'
-    bye = 'Thanks for playing!'
-    invalid = 'Invalid input. Please enter a valid option.'
-
-    # Handle user input
-    input_text = str(request.form['Body']).lower()
-
-    # provide the menu options
-    if last_response == 'Hello':
-        response = hello_prompt + '\n' + select + '\n'+ '\n'.join(TRIVIA['menu_options'])
-        
-   
-    # display the leaderboard
-    elif last_response == '1':
-        leaderboard = act.get_leaderboard()
-        response = f"Leaderboard:\n{leaderboard}"
-    
-    # start a round of easy mode trivia
-    elif last_response == str(2):
-        begin = 'Lets start the game!'
-        # if user_id not in CORPUS:
-        #     CORPUS[user_id] = {}
-        
-        # CORPUS[user_id]['current_game'] = {'question_num' == 0, 'score' == 0}
-        CORPUS[user_id]["current_game"] = {"question_num": 0, "score": 0}
-        # with open('chatbot_corpus.json', 'w') as myfile:
-        #     myfile.write(json.dumps(CORPUS, indent=4, default=list))
-        start_game(user_id, begin)
-    elif last_response == CORPUS[user_id]['current_question']['answer'] :
-        #act.update_score(True)
-        if CORPUS[user_id]['current_game']['question_num'] == 5:
-            CORPUS[user_id]['current_game']['score'] +=1
-            response = 'Correct!' + '\n' + 'Your final score is ' + str(CORPUS[user_id]['current_game']['score']) + '\n' + bye
+        if sent_input in ['1', '2', '3']:
+            if sent_input == '1':
+                response = lb
+            elif sent_input == '2':
+                response = easy
+                startGame(5)
+            elif sent_input == '3':
+                response = bye
+                #progRunning = False
         else:
-            CORPUS[user_id]['current_game']['question_num'] +=1 
-            CORPUS[user_id]['current_game']['score'] +=1
-            correct = 'Correct! ' +'\n' + 'Your current score is ' + str(CORPUS[user_id]['current_game']['score']) 
-            start_game(user_id, correct)
-        
-            
-    elif last_response == 'B' or last_response == 'C' or last_response == 'D':
-        #act.update_score(False)
-        
-        if  CORPUS[user_id]['current_game']['question_num'] == 5:
-            response = 'Your final score is ' + str(CORPUS[user_id]['current_game']['score']) + '\n' + bye
-        else:
-            CORPUS[user_id]['current_game']['question_num'] +=1 
-            incorrect = 'Incorrect! ' + '\n' + 'Your current score is ' + str(CORPUS[user_id]['current_game']['score'])
-            start_game(user_id, incorrect)
-            
-    # If the user selects option 3, end the session and save the actor object
-    elif last_response == '3':
-        response = bye
-        with open(f"users/{user_id}.pkl", 'wb') as f:
-            pickle.dump(act, f)
+            response = 'Invalid input.'
     
-    # If the user input is invalid, prompt them to enter a valid option
-    else:
-        response = invalid
-        
+    message = g.sms_client.messages.create(
+                     body=response,
+                     from_=yml_configs['twillio']['phone_number'],
+                     to=request.form['From'])
     
-    
-    if response:
+    if next_prompt:
         message = g.sms_client.messages.create(
-            body=response,
-            from_=yml_configs['twillio']['phone_number'],
-            to=request.form['From']
-        )
-    else:
-        message = g.sms_client.messages.create(
-            body="Sorry, we encountered an error. Please try again later.",
-            from_=yml_configs['twillio']['phone_number'],
-            to=request.form['From']
-        )
-
-    # Send the response back to the user
+                         body=next_prompt,
+                         from_=yml_configs['twillio']['phone_number'],
+                         to=request.form['From'])
     
-    logger.debug(response)
-    
-    return json_response(status="ok")
-
-
-            
-  
-
-    
-    
+    return json_response( status = "ok" )
