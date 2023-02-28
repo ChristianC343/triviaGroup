@@ -11,9 +11,13 @@
     "menu_options": [
         "1. Show Leaderboard",
         "2. Play Easy Mode (5 Questions)",
-        "3. Quit"
+        "3. Play Medium Mode (10 Questions)",
+        "4. Play Hard Mode (15 Questions)",
+        "5. Quit"
     ],
     "selection_prompt": {
         "content": "Please make a selection: "
     }
 }
+
+      
