@@ -82,7 +82,7 @@ def start_game(user_id, response):
 def handle_request():
     logger.debug(request.form)
 
-    #act = actor(request.form['From'])
+    act = actor(request.form['From'])
 
     act.save_msg(request.form['Body'])
     logger.debug(act.prev_msgs)
