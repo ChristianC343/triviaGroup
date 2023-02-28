@@ -51,7 +51,7 @@ def start_game(user_id, response):
     selected_question = questions[random_index]['question']
 
     options = list(questions[random_index]['options'].values())
-    answer = selected_question['answer']
+    answer = questions[random_index]['answer']
     question_text = f"Question : {selected_question['question']}\nA. {options[0]}\nB. {options[1]}\nC. {options[2]}\nD. {options[3]}\nEnter your answer (A, B, C, or D):"
     # Initialize the user's CORPUS if it doesn't exist
     if user_id not in CORPUS:
@@ -59,7 +59,7 @@ def start_game(user_id, response):
 
     # Store the selected question for later reference
     
-    CORPUS[user_id]['current_question'] = {'question': selected_question['question'], 'answer': answer}
+    CORPUS[user_id]['current_question'] = {'question': selected_question, 'answer': answer}
     
     with open('chatbot_corpus.json', 'w') as myfile:
             myfile.write(json.dumps(CORPUS, indent=4, default=list))
