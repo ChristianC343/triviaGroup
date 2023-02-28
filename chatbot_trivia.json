@@ -11,13 +11,100 @@
     "menu_options": [
         "1. Show Leaderboard",
         "2. Play Easy Mode (5 Questions)",
-        "3. Play Medium Mode (10 Questions)",
-        "4. Play Hard Mode (15 Questions)",
-        "5. Quit"
+        "3. Quit"
     ],
     "selection_prompt": {
         "content": "Please make a selection: "
-    }
+    },
+    "questions": [{
+            "question": "What animal has the highest blood pressure?",
+            "options": {
+                "A": "Giraffe",
+                "B": "Elephant",
+                "C": "Lion",
+                "D": "Whale"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "Whose laws of motion are these? 'An object in motion tends to stay in motion, while an object at rest tends to stay at rest.'",
+            "options": {
+                "A": "Isaac Newton",
+                "B": "Albert Einstein",
+                "C": "Galileo Galilei",
+                "D": "Nikola Tesla"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What is the boiling point of water at sea level in degrees Celsius?",
+            "options": {
+                "A": "100",
+                "B": "0",
+                "C": "-50",
+                "D": "50"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What is the largest organ in the human body?",
+            "options": {
+                "A": "Skin",
+                "B": "Liver",
+                "C": "Heart",
+                "D": "Brain"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "Which planet is known as the Red Planet?",
+            "options": {
+                "A": "Mars",
+                "B": "Venus",
+                "C": "Jupiter",
+                "D": "Saturn"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What is the smallest planet in our solar system?",
+            "options": {
+                "A": "Mercury",
+                "B": "Mars",
+                "C": "Venus",
+                "D": "Pluto"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "Which particle in an atom has a negative charge?",
+            "options": {
+                "A": "Electron",
+                "B": "Proton",
+                "C": "Neutron",
+                "D": "Nucleus"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What is the most abundant gas in the Earth's atmosphere?",
+            "options": {
+                "A": "Nitrogen",
+                "B": "Oxygen",
+                "C": "Carbon Dioxide",
+                "D": "Hydrogen"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What is the symbol for the element iron on the periodic table?",
+            "options": {
+                "A": "Fe",
+                "B": "C",
+                "C": "Au",
+                "D": "Ag"
+            },
+            "answer": "A"
+        }
+    ]
 }
-
-      

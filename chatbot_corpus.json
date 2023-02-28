@@ -1,16 +1,23 @@
 {
-    "input": {
-        "hello": [
-            "Hi there, text 'trivia' to start a trivia game!"
-        ],
-        "ayoub ibrahim": [
-            "DID NOT FIND"
-        ],
-        "ayoub": [
-            "DID NOT FIND"
-        ],
-        "trivia ": [
-            "DID NOT FIND"
-        ]
+    "user_id": [],
+    "+15713038708": {
+        "current_question": {
+            "question": "What animal has the highest blood pressure?",
+            "answer": "A"
+        },
+        "current_game": {
+            "question_num": 5,
+            "score": 3
+        }
+    },
+    "+16193799462": {
+        "current_question": {
+            "question": "What animal has the highest blood pressure?",
+            "answer": "A"
+        },
+        "current_game": {
+            "question_num": 1,
+            "score": 1
+        }
     }
 }
