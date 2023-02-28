@@ -42,23 +42,27 @@ import time
 
 response = ''
 
+questions_answered = [-1]
 
 
 def start_game(user_id, response):
     questions = TRIVIA['questions']
-    random_index = random.randint(0, len(questions)-1)
-    selected_question = questions[random_index]
+    random_index = -1
+    while random_index in questions_answered:
+        random_index = random.randint(0, len(questions)-1)
+    
+    selected_question = questions[random_index]['question']
 
-    options = list(selected_question['options'].values())
-    answer = selected_question['answer']
-    question_text = f"Question : {selected_question['question']}\nA. {options[0]}\nB. {options[1]}\nC. {options[2]}\nD. {options[3]}\nEnter your answer (A, B, C, or D):"
+    options = list(questions[random_index]['options'].values())
+    answer = questions[random_index]['answer']
+    question_text = f"Question : {selected_question}\nA. {options[0]}\nB. {options[1]}\nC. {options[2]}\nD. {options[3]}\nEnter your answer (A, B, C, or D):"
     # Initialize the user's CORPUS if it doesn't exist
     if user_id not in CORPUS:
         CORPUS[user_id] = {}
 
     # Store the selected question for later reference
-    
-    CORPUS[user_id]['current_question'] = {'question': selected_question['question'], 'answer': answer}
+
+    CORPUS[user_id]['current_question'] = {'question': selected_question, 'answer': answer}
     
     with open('chatbot_corpus.json', 'w') as myfile:
             myfile.write(json.dumps(CORPUS, indent=4, default=list))
@@ -72,7 +76,8 @@ def start_game(user_id, response):
         from_=request.form['To'],
         body= question_text
     )
-    
+    questions_answered.append(random_index)
+    print(questions_answered)
 
     #response = ''
 
@@ -85,20 +90,21 @@ def handle_request():
     # Load or create user object
     act = None
     user_id = request.form['From']
-    filename = f"users/{user_id}.pkl"
-    os.makedirs("users", exist_ok=True)
+    # filename = f"users/{user_id}.pkl"
+    # os.makedirs("users", exist_ok=True)
 
-    if exists(filename):
-        with open(f"users/{user_id}.pkl", 'rb') as p:
-            act = pickle.load(p)
-        print("I AM CURRENTLY LOADING")
-    else:
-        act= actor(request.form['From'])
-        # create the file and write the actor object to it
-        with open(filename, "wb") as f:
-            pickle.dump(actor, f)
+    # if exists(filename):
+    #     with open(f"users/{user_id}.pkl", 'rb') as p:
+    #         act = pickle.load(p)
+    #     print("I AM CURRENTLY LOADING")
+    # else:
+    #     act= actor(request.form['From'])
+    #     # create the file and write the actor object to it
+    #     with open(filename, "wb") as f:
+    #         pickle.dump(actor, f)
+    # 
+    # print("Printing msg : " + msg)
     msg = request.form['Body']
-    print("Printing msg : " + msg)
     act = actor(user_id)
     act.save_msg(msg)
     last_response = act.prev_msgs[-1]
@@ -122,20 +128,13 @@ def handle_request():
    
     # display the leaderboard
     elif last_response == '1':
-        leaderboard = act.get_leaderboard()
-        response = f"Leaderboard:\n{leaderboard}"
+        response = "UNDER CONSTRUCTION! " + '\n' + "Text 'Hello' for the menu options"
     
     # start a round of easy mode trivia
     elif last_response == str(2):
         begin = 'Lets start the game!'
-        # if user_id not in CORPUS:
-        #     CORPUS[user_id] = {}
-        
-        # CORPUS[user_id]['current_game'] = {'question_num' == 0, 'score' == 0}
-        CORPUS[user_id]["current_game"] = {"question_num": 0, "score": 0}
-        # with open('chatbot_corpus.json', 'w') as myfile:
-        #     myfile.write(json.dumps(CORPUS, indent=4, default=list))
         start_game(user_id, begin)
+        CORPUS[user_id]["current_game"] = {"question_num": 0, "score": 0}
     elif last_response == CORPUS[user_id]['current_question']['answer'] :
         #act.update_score(True)
         if CORPUS[user_id]['current_game']['question_num'] == 5:
