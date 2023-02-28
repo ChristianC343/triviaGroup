@@ -7,8 +7,6 @@ from flask_json import FlaskJSON, JsonError, json_response, as_json
 from os.path import exists
 
 
-
-
 from tools.logging import logger
 from things.actors import actor
 
@@ -41,37 +39,44 @@ import time
 
 
 response = ''
+question_counter = 0
+question_answered = []
 
 
 
 def start_game(user_id, response):
     questions = TRIVIA['questions']
-    random_index = random.randint(0, len(questions)-1)
-    selected_question = questions[random_index]
+    while question_counter < 5:
+        while random_index not in question_answered:
+            random_index = random.randint(0, len(questions)-1)
+            selected_question = questions[random_index]
 
-    options = list(selected_question['options'].values())
-    answer = selected_question['answer']
-    question_text = f"Question : {selected_question['question']}\nA. {options[0]}\nB. {options[1]}\nC. {options[2]}\nD. {options[3]}\nEnter your answer (A, B, C, or D):"
-    # Initialize the user's CORPUS if it doesn't exist
-    if user_id not in CORPUS:
-        CORPUS[user_id] = {}
+            options = list(selected_question['options'].values())
+            answer = selected_question['answer']
+            question_text = f"Question : {selected_question['question']}\nA. {options[0]}\nB. {options[1]}\nC. {options[2]}\nD. {options[3]}\nEnter your answer (A, B, C, or D):"
+            # Initialize the user's CORPUS if it doesn't exist
+            if user_id not in CORPUS:
+                CORPUS[user_id] = {}
 
-    # Store the selected question for later reference
-    
-    CORPUS[user_id]['current_question'] = {'question': selected_question['question'], 'answer': answer}
-    
-    with open('chatbot_corpus.json', 'w') as myfile:
-            myfile.write(json.dumps(CORPUS, indent=4, default=list))
-    message = g.sms_client.messages.create(
-        to=user_id,
-        from_=request.form['To'],
-        body= response 
-    )
-    message = g.sms_client.messages.create(
-        to=user_id,
-        from_=request.form['To'],
-        body= question_text
-    )
+            # Store the selected question for later reference
+            
+            CORPUS[user_id]['current_question'] = {'question': selected_question['question'], 'answer': answer}
+            
+            with open('chatbot_corpus.json', 'w') as myfile:
+                    myfile.write(json.dumps(CORPUS, indent=4, default=list))
+            message = g.sms_client.messages.create(
+                to=user_id,
+                from_=request.form['To'],
+                body= response 
+            )
+            message = g.sms_client.messages.create(
+                to=user_id,
+                from_=request.form['To'],
+                body= question_text
+            )
+        question_answered.append(random_index)
+        question_counter+=1
+
     
 
     #response = ''
@@ -119,7 +124,6 @@ def handle_request():
     if last_response == 'Hello':
         response = hello_prompt + '\n' + select + '\n'+ '\n'.join(TRIVIA['menu_options'])
         
-   
     # display the leaderboard
     elif last_response == '1':
         leaderboard = act.get_leaderboard()

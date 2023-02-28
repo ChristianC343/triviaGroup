@@ -16,8 +16,7 @@
     "selection_prompt": {
         "content": "Please make a selection: "
     },
-    "questions": [
-        {
+    "questions": [{
             "question": "What animal has the highest blood pressure?",
             "options": {
                 "A": "Giraffe",
@@ -109,4 +108,3 @@
         }
     ]
 }
-
