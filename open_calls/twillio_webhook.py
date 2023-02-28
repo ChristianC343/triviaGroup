@@ -54,8 +54,8 @@ def leaderboard_info_entered(user_id, act):
         LEADERBOARD = json.loads(leaderboardFile.read())
     
     LEADERBOARD.append({
-        "Name": last_response[5:],
-        "Score": CORPUS[user_id]['current_game']['score']
+        'Name': last_response[5:],
+        'Score': CORPUS[user_id]['current_game']['score']
     })
 
     with open('chatbot_leaderboard.json', 'w') as leaderboardFile:
