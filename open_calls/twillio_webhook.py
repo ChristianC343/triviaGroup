@@ -42,12 +42,13 @@ import time
 
 response = ''
 
+questions_answered = []
 
 
 def start_game(user_id, response):
     questions = TRIVIA['questions']
     random_index = random.randint(0, len(questions)-1)
-    selected_question = questions[random_index]
+    selected_question = questions[random_index]['question']
 
     options = list(selected_question['options'].values())
     answer = selected_question['answer']
