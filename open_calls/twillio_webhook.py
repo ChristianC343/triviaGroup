@@ -44,6 +44,31 @@ response = ''
 
 questions_answered = [-1]
 
+def leaderboard_info_entered(user_id, act):
+    message = g.sms_client.messages.create(
+            body="Enter a name",
+            from_=yml_configs['twillio']['phone_number'],
+            to=request.form['From']
+    )
+    last_response = act.prev_msgs[-1]
+
+    LEADERBOARD = {}
+
+    with open('chatbot_leaderboard.json', 'r') as leaderboardFile: 
+        LEADERBOARD = json.loads(leaderboardFile.read())
+    
+    LEADERBOARD.append({
+        "Name": last_response,
+        "Score": CORPUS[user_id]['current_game']['score']
+    })
+
+    with open('chatbot_leaderboard.json', 'w') as leaderboardFile:
+            json.dumps(LEADERBOARD, leaderboardFile, indent=4,  separators=(',',': '))
+
+
+
+    CORPUS[user_id]['current_game']['score']
+
 
 def start_game(user_id, response):
     questions = TRIVIA['questions']
@@ -139,6 +164,8 @@ def handle_request():
         #act.update_score(True)
         if CORPUS[user_id]['current_game']['question_num'] == 5:
             CORPUS[user_id]['current_game']['score'] +=1
+            
+            leaderboard_info_entered(user_id, act)
             response = 'Correct!' + '\n' + 'Your final score is ' + str(CORPUS[user_id]['current_game']['score']) + '\n' + bye
         else:
             CORPUS[user_id]['current_game']['question_num'] +=1 
