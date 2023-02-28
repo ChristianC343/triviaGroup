@@ -48,7 +48,7 @@ questions_answered = [-1]
 def start_game(user_id, response):
     questions = TRIVIA['questions']
     random_index = -1
-    while random_index not in questions_answered:
+    while random_index in questions_answered:
         random_index = random.randint(0, len(questions)-1)
     
     selected_question = questions[random_index]['question']
