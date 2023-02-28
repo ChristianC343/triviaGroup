@@ -45,11 +45,7 @@ response = ''
 questions_answered = [-1]
 
 def leaderboard_info_entered(user_id, act):
-    message = g.sms_client.messages.create(
-            body="Enter a name",
-            from_=yml_configs['twillio']['phone_number'],
-            to=request.form['From']
-    )
+    
     last_response = act.prev_msgs[-1]
 
     LEADERBOARD = {}
@@ -58,7 +54,7 @@ def leaderboard_info_entered(user_id, act):
         LEADERBOARD = json.loads(leaderboardFile.read())
     
     LEADERBOARD.append({
-        "Name": last_response,
+        "Name": last_response[5:],
         "Score": CORPUS[user_id]['current_game']['score']
     })
 
@@ -164,8 +160,11 @@ def handle_request():
         #act.update_score(True)
         if CORPUS[user_id]['current_game']['question_num'] == 5:
             CORPUS[user_id]['current_game']['score'] +=1
-            
-            leaderboard_info_entered(user_id, act)
+            message = g.sms_client.messages.create(
+            body="Enter a name after typing 'leadb'\nEX: leadb Name",
+            from_=yml_configs['twillio']['phone_number'],
+            to=request.form['From']
+        )
             response = 'Correct!' + '\n' + 'Your final score is ' + str(CORPUS[user_id]['current_game']['score']) + '\n' + bye
         else:
             CORPUS[user_id]['current_game']['question_num'] +=1 
@@ -183,6 +182,11 @@ def handle_request():
             CORPUS[user_id]['current_game']['question_num'] +=1 
             incorrect = 'Incorrect! ' + '\n' + 'Your current score is ' + str(CORPUS[user_id]['current_game']['score'])
             start_game(user_id, incorrect)
+
+    elif 'leadb' in last_response:
+        leaderboard_info_entered(user_id, act)
+
+
             
     # If the user selects option 3, end the session and save the actor object
     elif last_response == '3':
