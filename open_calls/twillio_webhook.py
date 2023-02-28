@@ -47,7 +47,9 @@ questions_answered = []
 
 def start_game(user_id, response):
     questions = TRIVIA['questions']
-    random_index = random.randint(0, len(questions)-1)
+    while random in questions_answered:
+        random_index = random.randint(0, len(questions)-1)
+    
     selected_question = questions[random_index]['question']
 
     options = list(questions[random_index]['options'].values())
@@ -58,7 +60,7 @@ def start_game(user_id, response):
         CORPUS[user_id] = {}
 
     # Store the selected question for later reference
-    
+
     CORPUS[user_id]['current_question'] = {'question': selected_question, 'answer': answer}
     
     with open('chatbot_corpus.json', 'w') as myfile:
@@ -73,7 +75,8 @@ def start_game(user_id, response):
         from_=request.form['To'],
         body= question_text
     )
-    
+    questions_answered.append(random_index)
+    print(questions_answered)
 
     #response = ''
 
