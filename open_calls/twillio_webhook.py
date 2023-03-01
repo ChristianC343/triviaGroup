@@ -135,7 +135,7 @@ def handle_request():
     lb = 'Leaderboard'
     easy = 'Easy mode'
     bye = 'Thanks for playing!'
-    invalid = 'Invalid input. Please enter a valid option.'
+    invalid = "Invalid input. Please Text 'Hello' to start the TRIVIA game"
 
     # Handle user input
     input_text = str(request.form['Body']).lower()
