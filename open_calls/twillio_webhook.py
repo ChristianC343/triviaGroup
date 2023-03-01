@@ -42,26 +42,26 @@ response = ''
 
 questions_answered = [-1]
 
-def leaderboard_info_entered(user_id, act):
+# def leaderboard_info_entered(user_id, act):
     
-    last_response = act.prev_msgs[-1]
+#     last_response = act.prev_msgs[-1]
 
-    LEADERBOARD = {}
+#     LEADERBOARD = {}
 
-    with open('chatbot_leaderboard.json', 'r') as leaderboardFile: 
-        LEADERBOARD = json.loads(leaderboardFile.read())
+#     with open('chatbot_leaderboard.json', 'r') as leaderboardFile: 
+#         LEADERBOARD = json.loads(leaderboardFile.read())
     
-    LEADERBOARD.append({
-        'Name': last_response[5:],
-        'Score': CORPUS[user_id]['current_game']['score']
-    })
+#     LEADERBOARD.append({
+#         'Name': last_response[5:],
+#         'Score': CORPUS[user_id]['current_game']['score']
+#     })
 
-    with open('chatbot_leaderboard.json', 'w') as leaderboardFile:
-            json.dumps(LEADERBOARD, leaderboardFile, indent=4,  separators=(',',': '))
+#     with open('chatbot_leaderboard.json', 'w') as leaderboardFile:
+#             json.dumps(LEADERBOARD, leaderboardFile, indent=4,  separators=(',',': '))
 
 
 
-    CORPUS[user_id]['current_game']['score']
+#     CORPUS[user_id]['current_game']['score']
 
 
 def start_game(user_id, response):
@@ -181,8 +181,8 @@ def handle_request():
             incorrect = 'Incorrect! ' + '\n' + 'Your current score is ' + str(CORPUS[user_id]['current_game']['score'])
             start_game(user_id, incorrect)
 
-    elif 'leadb' in last_response:
-        leaderboard_info_entered(user_id, act)
+    # elif 'leadb' in last_response:
+    #     leaderboard_info_entered(user_id, act)
 
 
             
